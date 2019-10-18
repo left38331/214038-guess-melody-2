@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {WelcomeScreen} from 'components/welcome-screen/welcome-screen';
+import {WelcomeScreen} from '../welcome-screen/welcome-screen';
 
 export const App = (props) => {
   const {gameTime, errorCount} = props;
@@ -8,6 +8,7 @@ export const App = (props) => {
   return <WelcomeScreen
     time={gameTime}
     errorCount={errorCount}
+    handleClick = {() => {}}
   />;
 };
 
