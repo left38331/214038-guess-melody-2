@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {WelcomeScreen} from './welcome-screen';
+import {WelcomeScreen} from 'components/welcome-screen/welcome-screen';
 
 it(`render correctly welcome-screen component`, () => {
   const welcomeScreenComponent = renderer.create(<WelcomeScreen

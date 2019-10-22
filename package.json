@@ -35,6 +35,10 @@
     "react-dom": "16.10.2"
   },
   "jest": {
-    "setupFilesAfterEnv": ["<rootDir>src/setup-tests.js"]
+    "setupFilesAfterEnv": ["<rootDir>src/setup-tests.js"],
+    "moduleDirectories": [
+      "src",
+      "node_modules"
+    ]
   }
 }
