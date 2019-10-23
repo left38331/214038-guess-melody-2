@@ -7,7 +7,7 @@ it(`Test click on button`, () => {
   const props = {
     time: 0,
     errorCount: 0,
-    handleClick: clickHandler
+    onStartButtonClick: clickHandler
   };
   const welcomeScreenComponent = shallow(<WelcomeScreen {...props}/>);
   const startButton = welcomeScreenComponent.find(`.welcome__button`);
