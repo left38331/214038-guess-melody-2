@@ -57,7 +57,7 @@ export class App extends React.PureComponent {
     this.setState({[key]: value});
   }
 
-  // вызываю на 68 строке, там пояснение, просто для себя чекал стэйт.
+  // вызываю на 76 строке, там пояснение, просто для себя чекал стэйт.
   checkUserAnswers() {
     // console.log(this.state);
   }
