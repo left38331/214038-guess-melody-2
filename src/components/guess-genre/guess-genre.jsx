@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export const GuessGenre = (props) => {
-  const {question, onAnswer, screenIndex, getValue} = props;
+  const {question, formSubmitHandler, getValueForAnswer} = props;
   const {answers} = question;
 
   return <section className="game game--genre">
@@ -31,20 +31,17 @@ export const GuessGenre = (props) => {
 
     <section className="game__screen">
       <h2 className="game__title">Выберите инди-рок треки</h2>
-      <form className="game__tracks" onSubmit={(evt) => {
-        evt.preventDefault();
-        onAnswer();
-      }}>
+      <form className="game__tracks" onSubmit={formSubmitHandler}>
 
         {answers.map((it, i) => {
-          return <div className="track" key={`${screenIndex}-answer-${i}`}>
+          return <div className="track" key={it.id}>
             <button className="track__button track__button--play" type="button"></button>
             <div className="track__status">
               <audio></audio>
             </div>
             <div className="game__answer">
-              <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${i + 1}`} id={`answer-${i + 1}`} onChange={getValue}/>
-              <label className="game__check" htmlFor={`answer-${i + 1}`}>Отметить</label>
+              <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${i + 1}`} id={it.id} onChange={getValueForAnswer} />
+              <label className="game__check" htmlFor={it.id}>Отметить</label>
             </div>
           </div>;
         })}
@@ -61,8 +58,6 @@ GuessGenre.propTypes = {
     answers: PropTypes.arrayOf(PropTypes.object),
     genre: PropTypes.string.isRequired
   }),
-  onAnswer: PropTypes.func.isRequired,
-  screenIndex: PropTypes.number.isRequired,
-  checkboxOne: PropTypes.bool,
-  getValue: PropTypes.func.isRequired
+  formSubmitHandler: PropTypes.func.isRequired,
+  getValueForAnswer: PropTypes.func.isRequired
 };

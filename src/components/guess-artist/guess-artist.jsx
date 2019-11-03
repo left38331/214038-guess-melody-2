@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export const GuessArtist = (props) => {
-  const {question, onAnswer, screenIndex, getValue} = props;
+  const {question, formSubmitHandler, getValueForAnswer} = props;
   const {answers} = question;
 
   return <section className="game game--artist">
@@ -40,14 +40,11 @@ export const GuessArtist = (props) => {
         </div>
       </div>
 
-      <form className="game__artist" onChange={onAnswer}>
+      <form className="game__artist" onChange={formSubmitHandler}>
         {answers.map((item, i) => {
-          return <div className="artist" key={`${screenIndex}-answer-${i}`}>
-            <input className="artist__input visually-hidden"type="radio" name="answer" value={`answer-${i + 1}`} id={`answer-${i + 1}`} onChange={(evt) => {
-              getValue(evt);
-            }
-            } />
-            <label className="artist__name" htmlFor={`answer-${i + 1}`}>
+          return <div className="artist" key={item.id}>
+            <input className="artist__input visually-hidden"type="radio" name="answer" value={`answer-${i + 1}`} id={item.id} onChange={getValueForAnswer}/>
+            <label className="artist__name" htmlFor={item.id}>
               <img className="artist__picture" src={item.picture} alt={item.artist} />
               {item.artist}
             </label>
@@ -64,7 +61,6 @@ GuessArtist.propTypes = {
     answers: PropTypes.arrayOf(PropTypes.object),
     song: PropTypes.object.isRequired
   }),
-  onAnswer: PropTypes.func.isRequired,
-  screenIndex: PropTypes.number.isRequired,
-  getValue: PropTypes.func
+  formSubmitHandler: PropTypes.func.isRequired,
+  getValueForAnswer: PropTypes.func.isRequired
 };

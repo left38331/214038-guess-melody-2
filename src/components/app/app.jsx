@@ -5,14 +5,15 @@ import {GuessArtist} from "components/guess-artist/guess-artist";
 import {GuessGenre} from "components/guess-genre/guess-genre";
 
 export class App extends React.PureComponent {
-  static getScreen(question, props, onUserAnswer, getValue) {
-    const {gameTime, errorCount, questions} = props;
+  getScreen() {
+    const {gameTime, errorCount, questions} = this.props;
+    const {question} = this.state;
 
     if (question === -1) {
       return <WelcomeScreen
         time={gameTime}
         errorCount={errorCount}
-        onStartButtonClick={onUserAnswer}
+        onStartButtonClick={this.changeScreen}
       />;
     }
 
@@ -21,16 +22,14 @@ export class App extends React.PureComponent {
     switch (currentQuestion.type) {
       case `genre`: return <GuessGenre
         question={currentQuestion}
-        onAnswer={onUserAnswer}
-        screenIndex={question}
-        getValue={getValue}
+        formSubmitHandler={this.formSubmitHandler}
+        getValueForAnswer={this.getValueForAnswer}
       />;
 
       case `artist`: return <GuessArtist
         question={currentQuestion}
-        onAnswer={onUserAnswer}
-        screenIndex={question}
-        getValue={getValue}
+        formSubmitHandler={this.formSubmitHandler}
+        getValueForAnswer={this.getValueForAnswer}
       />;
     }
 
@@ -42,46 +41,48 @@ export class App extends React.PureComponent {
 
     const {questions} = props;
 
-    this.getValue = this.getValue.bind(this);
+    this.getValueForAnswer = this.getValueForAnswer.bind(this);
     this.changeScreen = this.changeScreen.bind(this);
+    this.formSubmitHandler = this.formSubmitHandler.bind(this);
     this.questions = questions;
     this.state = {
-      question: -1
+      question: -1,
+      userAnswers: []
     };
   }
 
-  getValue(evt) {
-    const key = evt.target.value;
-    const value = evt.target.checked;
-
-    this.setState({[key]: value});
+  formSubmitHandler(evt) {
+    evt.preventDefault();
+    this.changeScreen();
   }
 
-  // вызываю на 76 строке, там пояснение, просто для себя чекал стэйт.
-  checkUserAnswers() {
-    // console.log(this.state);
+  getValueForAnswer(evt) {
+    const answer = evt.target.id;
+    const isChecked = evt.target.checked;
+
+    if (isChecked) {
+      this.setState((state) => state.userAnswers.push(answer));
+    } else {
+      this.setState((state) => {
+        const index = state.userAnswers.indexOf(answer);
+
+        return state.userAnswers.splice(index, 1);
+      });
+    }
   }
 
   clearState() {
-    this.setState({[`answer-1`]: false});
-    this.setState({[`answer-2`]: false});
-    this.setState({[`answer-3`]: false});
-    this.setState({[`answer-4`]: false});
+    this.setState({[`userAnswers`]: []});
   }
 
   changeScreen() {
     this.setState((state) => ({
       question: this.questions.length > state.question + 1 ? state.question + 1 : -1
-    }), () => {
-      this.checkUserAnswers(); // могу предположить что тут будет проверка, правильно ли ответил юзер, я бы ее вставил перед этой this.setState, но из-за асинхронности сетСтэйт не всегда успевает записаться новое значение в state
-      this.clearState();
-    });
+    }), () => this.clearState());
   }
 
   render() {
-    const {question} = this.state;
-
-    return App.getScreen(question, this.props, this.changeScreen, this.getValue);
+    return this.getScreen();
   }
 }
 

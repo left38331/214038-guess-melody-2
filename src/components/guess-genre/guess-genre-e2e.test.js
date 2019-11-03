@@ -1,19 +1,19 @@
 import React from 'react';
-import {GuessArtist} from "components/guess-artist/guess-artist";
+import {GuessGenre} from "components/guess-genre/guess-genre";
 import {shallow} from 'enzyme';
 import {questions} from "../../mocks/questions";
 
-const question = questions[0];
+const question = questions[1];
 
-it(`Test click on of answer in guess artist component`, () => {
+it(`Test click on of answer in guess genre component`, () => {
   const clickHandler = jest.fn();
   const props = {
     question,
     formSubmitHandler: clickHandler,
     getValueForAnswer: clickHandler
   };
-  const guessArtistComponent = shallow(<GuessArtist {...props}/>);
-  const allBtnChoice = guessArtistComponent.find(`.artist__input`);
+  const guessArtistComponent = shallow(<GuessGenre {...props}/>);
+  const allBtnChoice = guessArtistComponent.find(`.game__input`);
 
   allBtnChoice.forEach((btn, i) => {
     btn.simulate(`change`, {target: {value: `answer-${i + 1}`, checked: true}});

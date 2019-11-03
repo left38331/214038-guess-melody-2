@@ -6,11 +6,13 @@ import {questions} from "../../mocks/questions";
 const question = questions[0];
 
 it(`render correctly guess artist component`, () => {
-  const guessArtistComponent = renderer.create(<GuessArtist
-    onAnswer = {() => {}}
-    question = {question}
-    screenIndex = {0}
-  />).toJSON();
+  const props = {
+    formSubmitHandler: () => {},
+    getValueForAnswer: () => {},
+    question
+  };
+
+  const guessArtistComponent = renderer.create(<GuessArtist {...props} />).toJSON();
 
   expect(guessArtistComponent).toMatchSnapshot();
 });
