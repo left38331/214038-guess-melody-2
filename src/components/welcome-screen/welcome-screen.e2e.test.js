@@ -1,16 +1,13 @@
 import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import {WelcomeScreen} from "./welcome-screen";
-
-Enzyme.configure({adapter: new Adapter()});
+import {WelcomeScreen} from "components/welcome-screen/welcome-screen";
+import {shallow} from 'enzyme';
 
 it(`Test click on button`, () => {
   const clickHandler = jest.fn();
   const props = {
     time: 0,
     errorCount: 0,
-    handleClick: clickHandler
+    onStartButtonClick: clickHandler
   };
   const welcomeScreenComponent = shallow(<WelcomeScreen {...props}/>);
   const startButton = welcomeScreenComponent.find(`.welcome__button`);
