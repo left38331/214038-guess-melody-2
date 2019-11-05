@@ -1,7 +1,7 @@
 import React from 'react';
-import {GuessGenre} from "components/guess-genre/guess-genre";
+import {GuessGenre} from 'components/guess-genre/guess-genre';
 import {shallow} from 'enzyme';
-import {questions} from "../../mocks/questions";
+import {questions} from '../../mocks/questions';
 
 const question = questions[1];
 

@@ -1,56 +1,67 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {AudioPlayer} from 'components/audio-player/audio-player';
 
-export const GuessGenre = (props) => {
-  const {question, formSubmitHandler, getValueForAnswer} = props;
-  const {answers} = question;
+export class GuessGenre extends React.PureComponent {
+  constructor(props) {
+    super(props);
 
-  return <section className="game game--genre">
-    <header className="game__header">
-      <a className="game__back" href="#">
-        <span className="visually-hidden">Сыграть ещё раз</span>
-        <img className="game__logo" src="img/melody-logo-ginger.png" alt="Угадай мелодию" />
-      </a>
+    this.state = {
+      activePlayer: null
+    };
+  }
 
-      <svg xmlns="http://www.w3.org/2000/svg" className="timer" viewBox="0 0 780 780">
-        <circle className="timer__line" cx="390" cy="390" r="370" style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`}}/>
-      </svg>
+  render() {
+    return <section className="game game--genre">
+      <header className="game__header">
+        <a className="game__back" href="#">
+          <span className="visually-hidden">Сыграть ещё раз</span>
+          <img className="game__logo" src="img/melody-logo-ginger.png" alt="Угадай мелодию" />
+        </a>
 
-      <div className="timer__value" xmlns="http://www.w3.org/1999/xhtml">
-        <span className="timer__mins">05</span>
-        <span className="timer__dots">:</span>
-        <span className="timer__secs">00</span>
-      </div>
+        <svg xmlns="http://www.w3.org/2000/svg" className="timer" viewBox="0 0 780 780">
+          <circle className="timer__line" cx="390" cy="390" r="370" style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`}}/>
+        </svg>
 
-      <div className="game__mistakes">
-        <div className="wrong"></div>
-        <div className="wrong"></div>
-        <div className="wrong"></div>
-      </div>
-    </header>
+        <div className="timer__value" xmlns="http://www.w3.org/1999/xhtml">
+          <span className="timer__mins">05</span>
+          <span className="timer__dots">:</span>
+          <span className="timer__secs">00</span>
+        </div>
 
-    <section className="game__screen">
-      <h2 className="game__title">Выберите инди-рок треки</h2>
-      <form className="game__tracks" onSubmit={formSubmitHandler}>
+        <div className="game__mistakes">
+          <div className="wrong"></div>
+          <div className="wrong"></div>
+          <div className="wrong"></div>
+        </div>
+      </header>
 
-        {answers.map((it, i) => {
-          return <div className="track" key={it.id}>
-            <button className="track__button track__button--play" type="button"></button>
-            <div className="track__status">
-              <audio></audio>
-            </div>
-            <div className="game__answer">
-              <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${i + 1}`} id={it.id} onChange={getValueForAnswer} />
-              <label className="game__check" htmlFor={it.id}>Отметить</label>
-            </div>
-          </div>;
-        })}
+      <section className="game__screen">
+        <h2 className="game__title">Выберите инди-рок треки</h2>
+        <form className="game__tracks" onSubmit={this.props.formSubmitHandler}>
 
-        <button className="game__submit button" type="submit">Ответить</button>
-      </form>
-    </section>
-  </section>;
-};
+          {this.props.question.answers.map((it, i) => {
+            return <div className="track" key={it.id}>
+              <AudioPlayer
+                isPlaying={i === this.state.activePlayer}
+                src={it.src}
+                onPlayButtonClick={() => this.setState({
+                  activePlayer: this.state.activePlayer === i ? null : i
+                })}
+              />
+              <div className="game__answer">
+                <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${i + 1}`} id={it.id} onChange={this.props.getValueForAnswer} />
+                <label className="game__check" htmlFor={it.id}>Отметить</label>
+              </div>
+            </div>;
+          })}
+
+          <button className="game__submit button" type="submit">Ответить</button>
+        </form>
+      </section>
+    </section>;
+  }
+}
 
 GuessGenre.propTypes = {
   question: PropTypes.shape({

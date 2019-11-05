@@ -1,5 +1,5 @@
 import React from 'react';
-import {WelcomeScreen} from "components/welcome-screen/welcome-screen";
+import {WelcomeScreen} from 'components/welcome-screen/welcome-screen';
 import {shallow} from 'enzyme';
 
 it(`Test click on button`, () => {

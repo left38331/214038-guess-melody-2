@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {WelcomeScreen} from 'components/welcome-screen/welcome-screen';
-import {GuessArtist} from "components/guess-artist/guess-artist";
-import {GuessGenre} from "components/guess-genre/guess-genre";
+import {GuessArtist} from 'components/guess-artist/guess-artist';
+import {GuessGenre} from 'components/guess-genre/guess-genre';
 
 export class App extends React.PureComponent {
   constructor(props) {
@@ -23,6 +23,15 @@ export class App extends React.PureComponent {
   getScreen() {
     const {gameTime, errorCount, questions} = this.props;
     const {question} = this.state;
+
+    if (question === -1) {
+      return <WelcomeScreen
+        time={gameTime}
+        errorCount={errorCount}
+        onStartButtonClick={this.changeScreen}
+      />;
+    }
+
     const currentQuestion = questions[question];
 
     if (currentQuestion) {
@@ -43,11 +52,7 @@ export class App extends React.PureComponent {
       }
     }
 
-    return <WelcomeScreen
-      time={gameTime}
-      errorCount={errorCount}
-      onStartButtonClick={this.changeScreen}
-    />;
+    return null;
   }
 
   formSubmitHandler(evt) {
