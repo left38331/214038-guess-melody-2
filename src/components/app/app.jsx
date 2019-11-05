@@ -34,22 +34,20 @@ export class App extends React.PureComponent {
 
     const currentQuestion = questions[question];
 
-    if (currentQuestion) {
-      switch (currentQuestion.type) {
-        case `genre`:
-          return <GuessGenre
-            question={currentQuestion}
-            formSubmitHandler={this.formSubmitHandler}
-            getValueForAnswer={this.getValueForAnswer}
-          />;
+    switch (currentQuestion.type) {
+      case `genre`:
+        return <GuessGenre
+          question={currentQuestion}
+          formSubmitHandler={this.formSubmitHandler}
+          getValueForAnswer={this.getValueForAnswer}
+        />;
 
-        case `artist`:
-          return <GuessArtist
-            question={currentQuestion}
-            formSubmitHandler={this.formSubmitHandler}
-            getValueForAnswer={this.getValueForAnswer}
-          />;
-      }
+      case `artist`:
+        return <GuessArtist
+          question={currentQuestion}
+          formSubmitHandler={this.formSubmitHandler}
+          getValueForAnswer={this.getValueForAnswer}
+        />;
     }
 
     return null;
