@@ -11,25 +11,23 @@ describe(`Testing AudioPlayer`, () => {
 
   const clickHandler = jest.fn();
   const props = {
-    isPlaying: true,
+    isPlaying: false,
     onPlayButtonClick: clickHandler,
     src: question.answers[0].src
   };
   const audioPlayerComponent = mount(<AudioPlayer {...props}/>);
 
-  it(`Test "true": check state when click on "play" button`, () => {
-    audioPlayerComponent.setState({isPlaying: false});
+  it(`Test "true": check getting prop isPlaying when click on "play" button`, () => {
+    audioPlayerComponent.setProps({isPlaying: true});
 
-    const button = audioPlayerComponent.find(`.track__button`);
-
-    button.simulate(`click`);
-    expect(audioPlayerComponent.state().isPlaying).toEqual(true);
+    expect(audioPlayerComponent.find(`.track__button--pause`).exists()).toBeTruthy();
+    expect(audioPlayerComponent.find(`.track__button--play`).exists()).toBeFalsy();
   });
 
-  it(`Test "false": check state when click on "play" button`, () => {
-    const button = audioPlayerComponent.find(`.track__button`);
+  it(`Test "false": check getting prop isPlaying when click on "play" button`, () => {
+    audioPlayerComponent.setProps({isPlaying: false});
 
-    button.simulate(`click`);
-    expect(audioPlayerComponent.state().isPlaying).toEqual(false);
+    expect(audioPlayerComponent.find(`.track__button--play`).exists()).toBeTruthy();
+    expect(audioPlayerComponent.find(`.track__button--pause`).exists()).toBeFalsy();
   });
 });

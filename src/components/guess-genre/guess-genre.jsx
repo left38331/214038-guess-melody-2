@@ -7,7 +7,7 @@ export class GuessGenre extends React.PureComponent {
     super(props);
 
     this.state = {
-      activePlayer: null
+      activePlayerId: null
     };
   }
 
@@ -43,10 +43,10 @@ export class GuessGenre extends React.PureComponent {
           {this.props.question.answers.map((it, i) => {
             return <div className="track" key={it.id}>
               <AudioPlayer
-                isPlaying={i === this.state.activePlayer}
+                isPlaying={it.id === this.state.activePlayerId}
                 src={it.src}
                 onPlayButtonClick={() => this.setState({
-                  activePlayer: this.state.activePlayer === i ? null : i
+                  activePlayerId: this.state.activePlayerId === it.id ? null : it.id
                 })}
               />
               <div className="game__answer">
