@@ -91,12 +91,15 @@ exports[`render correctly guess artist component 1`] = `
       >
         <button
           className="track__button track__button--play"
+          onClick={[Function]}
           type="button"
         />
         <div
           className="track__status"
         >
-          <audio />
+          <audio
+            src="https://upload.wikimedia.org/wikipedia/en/transcoded/7/7d/ACDC_Itsalongway.ogg/ACDC_Itsalongway.ogg.mp3"
+          />
         </div>
       </div>
     </div>

@@ -1,41 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {WelcomeScreen} from 'components/welcome-screen/welcome-screen';
-import {GuessArtist} from "components/guess-artist/guess-artist";
-import {GuessGenre} from "components/guess-genre/guess-genre";
+import {GuessArtist} from 'components/guess-artist/guess-artist';
+import {GuessGenre} from 'components/guess-genre/guess-genre';
 
 export class App extends React.PureComponent {
-  getScreen() {
-    const {gameTime, errorCount, questions} = this.props;
-    const {question} = this.state;
-
-    if (question === -1) {
-      return <WelcomeScreen
-        time={gameTime}
-        errorCount={errorCount}
-        onStartButtonClick={this.changeScreen}
-      />;
-    }
-
-    const currentQuestion = questions[question];
-
-    switch (currentQuestion.type) {
-      case `genre`: return <GuessGenre
-        question={currentQuestion}
-        formSubmitHandler={this.formSubmitHandler}
-        getValueForAnswer={this.getValueForAnswer}
-      />;
-
-      case `artist`: return <GuessArtist
-        question={currentQuestion}
-        formSubmitHandler={this.formSubmitHandler}
-        getValueForAnswer={this.getValueForAnswer}
-      />;
-    }
-
-    return null;
-  }
-
   constructor(props) {
     super(props);
 
@@ -51,6 +20,39 @@ export class App extends React.PureComponent {
     };
   }
 
+  getScreen() {
+    const {gameTime, errorCount, questions} = this.props;
+    const {question} = this.state;
+
+    if (question === -1) {
+      return <WelcomeScreen
+        time={gameTime}
+        errorCount={errorCount}
+        onStartButtonClick={this.changeScreen}
+      />;
+    }
+
+    const currentQuestion = questions[question];
+
+    switch (currentQuestion.type) {
+      case `genre`:
+        return <GuessGenre
+          question={currentQuestion}
+          formSubmitHandler={this.formSubmitHandler}
+          getValueForAnswer={this.getValueForAnswer}
+        />;
+
+      case `artist`:
+        return <GuessArtist
+          question={currentQuestion}
+          formSubmitHandler={this.formSubmitHandler}
+          getValueForAnswer={this.getValueForAnswer}
+        />;
+    }
+
+    return null;
+  }
+
   formSubmitHandler(evt) {
     evt.preventDefault();
     this.changeScreen();
@@ -61,18 +63,20 @@ export class App extends React.PureComponent {
     const isChecked = evt.target.checked;
 
     if (isChecked) {
-      this.setState((state) => state.userAnswers.push(answer));
+      this.setState((prevState) => prevState.userAnswers.push(answer));
     } else {
-      this.setState((state) => {
-        const index = state.userAnswers.indexOf(answer);
+      this.setState((prevState) => {
+        const index = prevState.userAnswers.indexOf(answer);
 
-        return state.userAnswers.splice(index, 1);
+        return prevState.userAnswers.splice(index, 1);
       });
     }
   }
 
   clearState() {
-    this.setState({[`userAnswers`]: []});
+    this.setState({
+      [`userAnswers`]: []
+    });
   }
 
   changeScreen() {
