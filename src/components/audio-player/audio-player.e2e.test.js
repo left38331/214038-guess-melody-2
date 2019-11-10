@@ -1,6 +1,7 @@
 import React from 'react';
-import {AudioPlayer} from 'components/audio-player/audio-player';
 import {mount} from 'enzyme';
+
+import {AudioPlayer} from 'components/audio-player/audio-player';
 import {questions} from '../../mocks/questions';
 
 const question = questions[1];
