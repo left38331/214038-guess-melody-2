@@ -1,88 +1,49 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+
+import {ActionCreator} from '../../reducer';
 import {WelcomeScreen} from 'components/welcome-screen/welcome-screen';
 import {GuessArtist} from 'components/guess-artist/guess-artist';
 import {GuessGenre} from 'components/guess-genre/guess-genre';
 
 export class App extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    const {questions} = props;
-
-    this.getValueForAnswer = this.getValueForAnswer.bind(this);
-    this.changeScreen = this.changeScreen.bind(this);
-    this.formSubmitHandler = this.formSubmitHandler.bind(this);
-    this.questions = questions;
-    this.state = {
-      question: -1,
-      userAnswers: []
-    };
-  }
-
   getScreen() {
-    const {gameTime, errorCount, questions} = this.props;
-    const {question} = this.state;
+    const {mistakes, maxMistakes, questions, onWelcomeScreenClick, step, onUserAnswer, time, onTimeTick} = this.props;
 
-    if (question === -1) {
+    if (step === -1) {
       return <WelcomeScreen
-        time={gameTime}
-        errorCount={errorCount}
-        onStartButtonClick={this.changeScreen}
+        time={time}
+        errorCount={maxMistakes}
+        onStartButtonClick={onWelcomeScreenClick}
       />;
     }
 
-    const currentQuestion = questions[question];
+    const currentQuestion = questions[step];
 
-    switch (currentQuestion.type) {
-      case `genre`:
-        return <GuessGenre
-          question={currentQuestion}
-          formSubmitHandler={this.formSubmitHandler}
-          getValueForAnswer={this.getValueForAnswer}
-        />;
+    if (currentQuestion) {
+      switch (currentQuestion.type) {
+        case `genre`:
+          return <GuessGenre
+            time={time}
+            onTimeTick={onTimeTick}
+            mistakes={mistakes}
+            question={currentQuestion}
+            onUserAnswer={(userAnswer) => onUserAnswer(userAnswer, currentQuestion, mistakes, maxMistakes)}
+          />;
 
-      case `artist`:
-        return <GuessArtist
-          question={currentQuestion}
-          formSubmitHandler={this.formSubmitHandler}
-          getValueForAnswer={this.getValueForAnswer}
-        />;
+        case `artist`:
+          return <GuessArtist
+            time={time}
+            onTimeTick={onTimeTick}
+            mistakes={mistakes}
+            question={currentQuestion}
+            onUserAnswer={(userAnswer) => onUserAnswer(userAnswer, currentQuestion, mistakes, maxMistakes)}
+          />;
+      }
     }
 
     return null;
-  }
-
-  formSubmitHandler(evt) {
-    evt.preventDefault();
-    this.changeScreen();
-  }
-
-  getValueForAnswer(evt) {
-    const answer = evt.target.id;
-    const isChecked = evt.target.checked;
-
-    if (isChecked) {
-      this.setState((prevState) => prevState.userAnswers.push(answer));
-    } else {
-      this.setState((prevState) => {
-        const index = prevState.userAnswers.indexOf(answer);
-
-        return prevState.userAnswers.splice(index, 1);
-      });
-    }
-  }
-
-  clearState() {
-    this.setState({
-      [`userAnswers`]: []
-    });
-  }
-
-  changeScreen() {
-    this.setState((state) => ({
-      question: this.questions.length > state.question + 1 ? state.question + 1 : -1
-    }), () => this.clearState());
   }
 
   render() {
@@ -91,7 +52,34 @@ export class App extends React.PureComponent {
 }
 
 App.propTypes = {
-  gameTime: PropTypes.number.isRequired,
-  errorCount: PropTypes.number.isRequired,
+  time: PropTypes.number.isRequired,
+  maxMistakes: PropTypes.number.isRequired,
+  mistakes: PropTypes.number.isRequired,
+  step: PropTypes.number.isRequired,
   questions: PropTypes.arrayOf(PropTypes.object),
+  onWelcomeScreenClick: PropTypes.func.isRequired,
+  onUserAnswer: PropTypes.func.isRequired,
+  onTimeTick: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  step: state.step,
+  mistakes: state.mistakes,
+  time: state.time
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onWelcomeScreenClick: () => dispatch(ActionCreator.incrementStep()),
+  onUserAnswer: (userAnswer, question, mistakes, maxMistakes) => {
+    dispatch(ActionCreator.incrementStep());
+    dispatch(ActionCreator.incrementMistake(
+        userAnswer,
+        question,
+        mistakes,
+        maxMistakes
+    ));
+  },
+  onTimeTick: (time) => dispatch(ActionCreator.decrementTime(time))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

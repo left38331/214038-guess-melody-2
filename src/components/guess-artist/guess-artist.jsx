@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import {AudioPlayer} from 'components/audio-player/audio-player';
+import {Mistakes} from 'components/mistakes/mistakes';
+import {Timer} from "components/timer/timer";
 
 export class GuessArtist extends React.PureComponent {
   constructor(props) {
@@ -23,17 +26,8 @@ export class GuessArtist extends React.PureComponent {
           <circle className="timer__line" cx="390" cy="390" r="370" style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`}}/>
         </svg>
 
-        <div className="timer__value" xmlns="http://www.w3.org/1999/xhtml">
-          <span className="timer__mins">05</span>
-          <span className="timer__dots">:</span>
-          <span className="timer__secs">00</span>
-        </div>
-
-        <div className="game__mistakes">
-          <div className="wrong"></div>
-          <div className="wrong"></div>
-          <div className="wrong"></div>
-        </div>
+        <Timer time={this.props.time} onTimeTick={this.props.onTimeTick}/>
+        <Mistakes mistakes={this.props.mistakes}/>
       </header>
 
       <section className="game__screen">
@@ -48,10 +42,10 @@ export class GuessArtist extends React.PureComponent {
           </div>
         </div>
 
-        <form className="game__artist" onChange={this.props.formSubmitHandler}>
+        <form className="game__artist">
           {this.props.question.answers.map((item, i) => {
             return <div className="artist" key={item.id}>
-              <input className="artist__input visually-hidden" type="radio" name="answer" value={`answer-${i + 1}`} id={item.id} onChange={this.props.getValueForAnswer}/>
+              <input className="artist__input visually-hidden" type="radio" name="answer" value={`answer-${i + 1}`} id={item.id} onChange={()=> this.props.onUserAnswer(item)}/>
               <label className="artist__name" htmlFor={item.id}>
                 <img className="artist__picture" src={item.picture} alt={item.artist}/>
                 {item.artist}
@@ -70,6 +64,8 @@ GuessArtist.propTypes = {
     answers: PropTypes.arrayOf(PropTypes.object),
     song: PropTypes.object.isRequired
   }),
-  formSubmitHandler: PropTypes.func.isRequired,
-  getValueForAnswer: PropTypes.func.isRequired
+  onUserAnswer: PropTypes.func.isRequired,
+  mistakes: PropTypes.number.isRequired,
+  time: PropTypes.number.isRequired,
+  onTimeTick: PropTypes.func.isRequired,
 };

@@ -63,17 +63,8 @@ exports[`render correctly guess genre component 1`] = `
     </div>
     <div
       className="game__mistakes"
-    >
-      <div
-        className="wrong"
-      />
-      <div
-        className="wrong"
-      />
-      <div
-        className="wrong"
-      />
-    </div>
+    />
+    ;
   </header>
   <section
     className="game__screen"
@@ -106,6 +97,7 @@ exports[`render correctly guess genre component 1`] = `
           className="game__answer"
         >
           <input
+            checked={false}
             className="game__input visually-hidden"
             id={1}
             name="answer"
@@ -140,6 +132,7 @@ exports[`render correctly guess genre component 1`] = `
           className="game__answer"
         >
           <input
+            checked={false}
             className="game__input visually-hidden"
             id={2}
             name="answer"
@@ -174,6 +167,7 @@ exports[`render correctly guess genre component 1`] = `
           className="game__answer"
         >
           <input
+            checked={false}
             className="game__input visually-hidden"
             id={3}
             name="answer"
@@ -208,6 +202,7 @@ exports[`render correctly guess genre component 1`] = `
           className="game__answer"
         >
           <input
+            checked={false}
             className="game__input visually-hidden"
             id={4}
             name="answer"

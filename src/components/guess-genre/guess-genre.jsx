@@ -1,13 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import {AudioPlayer} from 'components/audio-player/audio-player';
+import {Mistakes} from "components/mistakes/mistakes";
+import {Timer} from "components/timer/timer";
 
 export class GuessGenre extends React.PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
-      activePlayerId: null
+      activePlayerId: null,
+      userAnswer: new Array(props.question.answers.length).fill(false)
     };
   }
 
@@ -23,22 +27,16 @@ export class GuessGenre extends React.PureComponent {
           <circle className="timer__line" cx="390" cy="390" r="370" style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`}}/>
         </svg>
 
-        <div className="timer__value" xmlns="http://www.w3.org/1999/xhtml">
-          <span className="timer__mins">05</span>
-          <span className="timer__dots">:</span>
-          <span className="timer__secs">00</span>
-        </div>
-
-        <div className="game__mistakes">
-          <div className="wrong"></div>
-          <div className="wrong"></div>
-          <div className="wrong"></div>
-        </div>
+        <Timer time={this.props.time} onTimeTick={this.props.onTimeTick} />
+        <Mistakes mistakes={this.props.mistakes}/>;
       </header>
 
       <section className="game__screen">
         <h2 className="game__title">Выберите инди-рок треки</h2>
-        <form className="game__tracks" onSubmit={this.props.formSubmitHandler}>
+        <form className="game__tracks" onSubmit={(evt) => {
+          evt.preventDefault();
+          this.props.onUserAnswer(this.state.userAnswer);
+        }}>
 
           {this.props.question.answers.map((it, i) => {
             return <div className="track" key={it.id}>
@@ -50,7 +48,9 @@ export class GuessGenre extends React.PureComponent {
                 })}
               />
               <div className="game__answer">
-                <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${i + 1}`} id={it.id} onChange={this.props.getValueForAnswer} />
+                <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${i + 1}`} id={it.id} checked={this.state.userAnswer[i]} onChange={() => {
+                  const userAnswer = [...this.state.userAnswer]; userAnswer[i] = !userAnswer[i]; this.setState({userAnswer});
+                }} />
                 <label className="game__check" htmlFor={it.id}>Отметить</label>
               </div>
             </div>;
@@ -69,6 +69,8 @@ GuessGenre.propTypes = {
     answers: PropTypes.arrayOf(PropTypes.object),
     genre: PropTypes.string.isRequired
   }),
-  formSubmitHandler: PropTypes.func.isRequired,
-  getValueForAnswer: PropTypes.func.isRequired
+  onUserAnswer: PropTypes.func.isRequired,
+  mistakes: PropTypes.number.isRequired,
+  time: PropTypes.number.isRequired,
+  onTimeTick: PropTypes.func.isRequired,
 };

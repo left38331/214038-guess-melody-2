@@ -7,9 +7,11 @@ const question = questions[0];
 
 it(`render correctly guess artist component`, () => {
   const props = {
-    formSubmitHandler: () => {},
-    getValueForAnswer: () => {},
-    question
+    question,
+    onUserAnswer: () => {},
+    onTimeTick: () => {},
+    mistakes: 0,
+    time: 300,
   };
 
   const guessArtistComponent = renderer.create(<GuessArtist {...props} />, {

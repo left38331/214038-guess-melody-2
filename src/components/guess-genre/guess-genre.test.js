@@ -7,9 +7,11 @@ const question = questions[1];
 
 it(`render correctly guess genre component`, () => {
   const props = {
-    formSubmitHandler: () => {},
-    getValueForAnswer: () => {},
-    question
+    question,
+    onUserAnswer: () => {},
+    onTimeTick: () => {},
+    mistakes: 0,
+    time: 300,
   };
 
   const guessGenreComponent = renderer.create(<GuessGenre {...props} />, {
