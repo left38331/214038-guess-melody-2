@@ -81,18 +81,6 @@ exports[`render correctly guess genre component 1`] = `
       <div
         className="track"
       >
-        <button
-          className="track__button track__button--play"
-          onClick={[Function]}
-          type="button"
-        />
-        <div
-          className="track__status"
-        >
-          <audio
-            src="https://upload.wikimedia.org/wikipedia/en/transcoded/7/7d/ACDC_Itsalongway.ogg/ACDC_Itsalongway.ogg.mp3"
-          />
-        </div>
         <div
           className="game__answer"
         >
@@ -116,18 +104,6 @@ exports[`render correctly guess genre component 1`] = `
       <div
         className="track"
       >
-        <button
-          className="track__button track__button--play"
-          onClick={[Function]}
-          type="button"
-        />
-        <div
-          className="track__status"
-        >
-          <audio
-            src="https://upload.wikimedia.org/wikipedia/en/transcoded/8/89/My_Kind_Of_Town_clip.ogg/My_Kind_Of_Town_clip.ogg.mp3"
-          />
-        </div>
         <div
           className="game__answer"
         >
@@ -151,18 +127,6 @@ exports[`render correctly guess genre component 1`] = `
       <div
         className="track"
       >
-        <button
-          className="track__button track__button--play"
-          onClick={[Function]}
-          type="button"
-        />
-        <div
-          className="track__status"
-        >
-          <audio
-            src="https://upload.wikimedia.org/wikipedia/en/transcoded/4/40/Madonna_-_You%27ll_See.ogg/Madonna_-_You%27ll_See.ogg.mp3"
-          />
-        </div>
         <div
           className="game__answer"
         >
@@ -186,18 +150,6 @@ exports[`render correctly guess genre component 1`] = `
       <div
         className="track"
       >
-        <button
-          className="track__button track__button--play"
-          onClick={[Function]}
-          type="button"
-        />
-        <div
-          className="track__status"
-        >
-          <audio
-            src="https://upload.wikimedia.org/wikipedia/ru/transcoded/d/d1/Rammstein_-_Keine_Lust.ogg/Rammstein_-_Keine_Lust.ogg.mp3"
-          />
-        </div>
         <div
           className="game__answer"
         >

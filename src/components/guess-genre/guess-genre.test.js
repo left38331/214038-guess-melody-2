@@ -21,6 +21,10 @@ it(`render correctly guess genre component`, () => {
     onTimeTick: () => {},
     mistakes: 0,
     time: 300,
+    renderPlayer: () => {},
+    renderGameAnswer: () => {},
+    stateUserAnswers: [false, false, false, false],
+    setStateUserAnswer: () => {},
   };
 
   const guessGenreComponent = renderer.create(<Provider store={store}>

@@ -7,12 +7,14 @@ const question = questions[0];
 
 it(`Test click on of answer in guess artist component`, () => {
   const clickHandler = jest.fn();
+  const renderPlayer = jest.fn();
   const props = {
     question,
     onUserAnswer: clickHandler,
     onTimeTick: () => {},
     mistakes: 0,
     time: 300,
+    renderPlayer
   };
   const guessArtistComponent = shallow(<GuessArtist {...props}/>);
   const btnChoiceFirst = guessArtistComponent.find(`.artist__input`).at(0);
