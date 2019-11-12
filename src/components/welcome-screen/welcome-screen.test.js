@@ -4,7 +4,6 @@ import {WelcomeScreen} from 'components/welcome-screen/welcome-screen';
 
 it(`render correctly welcome-screen component`, () => {
   const welcomeScreenComponent = renderer.create(<WelcomeScreen
-    time = {0}
     errorCount = {0}
   />).toJSON();
 

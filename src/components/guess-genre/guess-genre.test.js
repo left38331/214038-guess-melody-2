@@ -1,18 +1,31 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+
 import {GuessGenre} from 'components/guess-genre/guess-genre';
 import {questions} from '../../mocks/questions';
 
 const question = questions[1];
 
 it(`render correctly guess genre component`, () => {
+  const store = createStore(() => ({
+    step: -1,
+    mistakes: 0,
+    time: 300
+  }));
+
   const props = {
-    formSubmitHandler: () => {},
-    getValueForAnswer: () => {},
-    question
+    question,
+    onUserAnswer: () => {},
+    onTimeTick: () => {},
+    mistakes: 0,
+    time: 300,
   };
 
-  const guessGenreComponent = renderer.create(<GuessGenre {...props} />, {
+  const guessGenreComponent = renderer.create(<Provider store={store}>
+    <GuessGenre {...props} />
+  </Provider>, {
     createNodeMock: (element) => {
       if (element.type === `audio`) {
         return {};

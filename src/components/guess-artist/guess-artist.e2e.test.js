@@ -9,14 +9,14 @@ it(`Test click on of answer in guess artist component`, () => {
   const clickHandler = jest.fn();
   const props = {
     question,
-    formSubmitHandler: clickHandler,
-    getValueForAnswer: clickHandler
+    onUserAnswer: clickHandler,
+    onTimeTick: () => {},
+    mistakes: 0,
+    time: 300,
   };
   const guessArtistComponent = shallow(<GuessArtist {...props}/>);
-  const allBtnChoice = guessArtistComponent.find(`.artist__input`);
+  const btnChoiceFirst = guessArtistComponent.find(`.artist__input`).at(0);
 
-  allBtnChoice.forEach((btn, i) => {
-    btn.simulate(`change`, {target: {value: `answer-${i + 1}`, checked: true}});
-    expect(clickHandler).toBeCalledWith({target: {value: `answer-${i + 1}`, checked: true}});
-  });
+  btnChoiceFirst.simulate(`change`);
+  expect(clickHandler).toBeCalledWith(question.answers[0]);
 });
