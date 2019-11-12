@@ -37,9 +37,7 @@ exports[`render correctly welcome-screen component 1`] = `
     className="welcome__rules-list"
   >
     <li>
-      За 
-      0
-       минут нужно ответить на все вопросы.
+      За 5 минут нужно ответить на все вопросы.
     </li>
     <li>
       Можно допустить 

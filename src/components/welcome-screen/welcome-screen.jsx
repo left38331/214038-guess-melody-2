@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export const WelcomeScreen = (props) => {
-  const {time, errorCount, onStartButtonClick} = props;
+  const {errorCount, onStartButtonClick} = props;
 
   return <section className="welcome">
     <div className="welcome__logo">
@@ -12,7 +12,7 @@ export const WelcomeScreen = (props) => {
     <h2 className="welcome__rules-title">Правила игры</h2>
     <p className="welcome__text">Правила просты:</p>
     <ul className="welcome__rules-list">
-      <li>За {time / 60} минут нужно ответить на все вопросы.</li>
+      <li>За 5 минут нужно ответить на все вопросы.</li>
       <li>Можно допустить {errorCount} ошибки.</li>
     </ul>
     <p className="welcome__text">Удачи!</p>
@@ -20,7 +20,6 @@ export const WelcomeScreen = (props) => {
 };
 
 WelcomeScreen.propTypes = {
-  time: PropTypes.number.isRequired,
   errorCount: PropTypes.number.isRequired,
   onStartButtonClick: PropTypes.func
 };

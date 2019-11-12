@@ -1,11 +1,9 @@
 import React from 'react';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 export const Mistakes = (props) => {
   return <div className="game__mistakes">
-    {new Array(props.mistakes).fill(true).map((it, i) => {
-      return <div key={i} className="wrong"></div>;
-    })}
+    {new Array(props.mistakes).fill(true).map((it, i) => <div key={i} className="wrong"></div>)}
   </div>;
 };
 

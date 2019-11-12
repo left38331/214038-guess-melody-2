@@ -9,11 +9,10 @@ import {GuessGenre} from 'components/guess-genre/guess-genre';
 
 export class App extends React.PureComponent {
   getScreen() {
-    const {mistakes, maxMistakes, questions, onWelcomeScreenClick, step, onUserAnswer, time, onTimeTick} = this.props;
+    const {mistakes, maxMistakes, questions, onWelcomeScreenClick, step, onUserAnswer} = this.props;
 
     if (step === -1) {
       return <WelcomeScreen
-        time={time}
         errorCount={maxMistakes}
         onStartButtonClick={onWelcomeScreenClick}
       />;
@@ -25,8 +24,6 @@ export class App extends React.PureComponent {
       switch (currentQuestion.type) {
         case `genre`:
           return <GuessGenre
-            time={time}
-            onTimeTick={onTimeTick}
             mistakes={mistakes}
             question={currentQuestion}
             onUserAnswer={(userAnswer) => onUserAnswer(userAnswer, currentQuestion, mistakes, maxMistakes)}
@@ -34,8 +31,6 @@ export class App extends React.PureComponent {
 
         case `artist`:
           return <GuessArtist
-            time={time}
-            onTimeTick={onTimeTick}
             mistakes={mistakes}
             question={currentQuestion}
             onUserAnswer={(userAnswer) => onUserAnswer(userAnswer, currentQuestion, mistakes, maxMistakes)}
@@ -52,20 +47,17 @@ export class App extends React.PureComponent {
 }
 
 App.propTypes = {
-  time: PropTypes.number.isRequired,
   maxMistakes: PropTypes.number.isRequired,
   mistakes: PropTypes.number.isRequired,
   step: PropTypes.number.isRequired,
   questions: PropTypes.arrayOf(PropTypes.object),
   onWelcomeScreenClick: PropTypes.func.isRequired,
   onUserAnswer: PropTypes.func.isRequired,
-  onTimeTick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   step: state.step,
   mistakes: state.mistakes,
-  time: state.time
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -79,7 +71,6 @@ const mapDispatchToProps = (dispatch) => ({
         maxMistakes
     ));
   },
-  onTimeTick: (time) => dispatch(ActionCreator.decrementTime(time))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

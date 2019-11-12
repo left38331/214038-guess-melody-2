@@ -1,5 +1,5 @@
-import {ActionCreator} from "./reducer";
-import {reducer} from "./reducer";
+import {ActionCreator} from './reducer';
+import {reducer} from './reducer';
 
 describe(`Action creators works correctly`, () => {
   it(`Action creator for incrementing step returns correct action`, () => {

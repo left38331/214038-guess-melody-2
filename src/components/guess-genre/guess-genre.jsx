@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {AudioPlayer} from 'components/audio-player/audio-player';
-import {Mistakes} from "components/mistakes/mistakes";
-import {Timer} from "components/timer/timer";
+import {Mistakes} from 'components/mistakes/mistakes';
+import Timer from 'components/timer/timer';
 
 export class GuessGenre extends React.PureComponent {
   constructor(props) {
@@ -27,7 +27,7 @@ export class GuessGenre extends React.PureComponent {
           <circle className="timer__line" cx="390" cy="390" r="370" style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`}}/>
         </svg>
 
-        <Timer time={this.props.time} onTimeTick={this.props.onTimeTick} />
+        <Timer/>
         <Mistakes mistakes={this.props.mistakes}/>;
       </header>
 
@@ -71,6 +71,4 @@ GuessGenre.propTypes = {
   }),
   onUserAnswer: PropTypes.func.isRequired,
   mistakes: PropTypes.number.isRequired,
-  time: PropTypes.number.isRequired,
-  onTimeTick: PropTypes.func.isRequired,
 };
