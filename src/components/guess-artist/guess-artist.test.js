@@ -19,6 +19,7 @@ it(`render correctly guess artist component`, () => {
     question,
     onUserAnswer: () => {},
     mistakes: 0,
+    renderPlayer: () => {},
   };
 
   const guessArtistComponent = renderer.create(<Provider store={store}>

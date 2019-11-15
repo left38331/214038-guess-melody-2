@@ -6,6 +6,11 @@ import {ActionCreator} from '../../reducer';
 import {WelcomeScreen} from 'components/welcome-screen/welcome-screen';
 import {GuessArtist} from 'components/guess-artist/guess-artist';
 import {GuessGenre} from 'components/guess-genre/guess-genre';
+import withActivePlayer from '../../hocs/with-active-player/with-active-player';
+import withUserAnswers from '../../hocs/with-user-answers/with-user-answers';
+
+const GuessGenreWrapped = withUserAnswers(withActivePlayer(GuessGenre));
+const GuessArtistWrapped = withActivePlayer(GuessArtist);
 
 export class App extends React.PureComponent {
   getScreen() {
@@ -23,14 +28,14 @@ export class App extends React.PureComponent {
     if (currentQuestion) {
       switch (currentQuestion.type) {
         case `genre`:
-          return <GuessGenre
+          return <GuessGenreWrapped
             mistakes={mistakes}
             question={currentQuestion}
             onUserAnswer={(userAnswer) => onUserAnswer(userAnswer, currentQuestion, mistakes, maxMistakes)}
           />;
 
         case `artist`:
-          return <GuessArtist
+          return <GuessArtistWrapped
             mistakes={mistakes}
             question={currentQuestion}
             onUserAnswer={(userAnswer) => onUserAnswer(userAnswer, currentQuestion, mistakes, maxMistakes)}
