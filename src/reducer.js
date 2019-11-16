@@ -1,3 +1,5 @@
+import api from './api';
+
 const isArtistAnswerCorrect = (userAnswer, question) => {
   return userAnswer.artist === question.song.artist;
 };
@@ -9,7 +11,8 @@ const isGenreAnswerCorrect = (userAnswer, question) => userAnswer.every((it, i) 
 const initialState = {
   step: -1,
   mistakes: 0,
-  time: 300
+  time: 300,
+  questions: []
 };
 
 export const ActionCreator = {
@@ -53,6 +56,22 @@ export const ActionCreator = {
       type: `DECREMENT_TIME`,
       payload: 1
     };
+  },
+
+  loadQuestions: (questions) => {
+    return {
+      type: `LOAD_QUESTIONS`,
+      payload: questions
+    };
+  }
+};
+
+export const Operation = {
+  loadQuestions: () => (dispatch) => {
+    return api.get(`/questions`)
+      .then((response) => {
+        dispatch(ActionCreator.loadQuestions(response.data));
+      });
   }
 };
 
@@ -68,6 +87,10 @@ export const reducer = (state = initialState, action) => {
 
     case `DECREMENT_TIME`: return Object.assign({}, state, {
       time: state.time - action.payload
+    });
+
+    case `LOAD_QUESTIONS`: return Object.assign({}, state, {
+      questions: action.payload
     });
 
     case `RESET`: return Object.assign({}, initialState);

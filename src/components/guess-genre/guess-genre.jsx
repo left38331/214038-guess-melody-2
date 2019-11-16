@@ -28,13 +28,13 @@ export const GuessGenre = (props) => {
       }}>
 
         {props.question.answers.map((it, i) => {
-          return <div className="track" key={it.id}>
+          return <div className="track" key={i}>
             {props.renderPlayer(it, i)}
             <div className="game__answer">
-              <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${i + 1}`} id={it.id} checked={props.stateUserAnswers[i]} onChange={() => {
+              <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${i + 1}`} id={i} checked={props.stateUserAnswers[i]} onChange={() => {
                 const userAnswer = [...props.stateUserAnswers]; userAnswer[i] = !userAnswer[i]; props.setStateUserAnswer(userAnswer);
               }} />
-              <label className="game__check" htmlFor={it.id}>Отметить</label>
+              <label className="game__check" htmlFor={i}>Отметить</label>
             </div>
           </div>;
         })}

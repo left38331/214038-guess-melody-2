@@ -15,6 +15,7 @@ const GuessArtistWrapped = withActivePlayer(GuessArtist);
 export class App extends React.PureComponent {
   getScreen() {
     const {mistakes, maxMistakes, questions, onWelcomeScreenClick, step, onUserAnswer} = this.props;
+    console.log(this.props.questions)
 
     if (step === -1) {
       return <WelcomeScreen
@@ -63,6 +64,7 @@ App.propTypes = {
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   step: state.step,
   mistakes: state.mistakes,
+  questions: state.questions
 });
 
 const mapDispatchToProps = (dispatch) => ({

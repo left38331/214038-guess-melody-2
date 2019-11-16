@@ -1,19 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
+import thunk from 'redux-thunk';
+import {compose} from 'recompose';
 
 import App from 'components/app/app';
-import {settings, questions} from "./mocks/questions";
-import {reducer} from "./reducer";
+import {settings} from "./mocks/questions";
+import {reducer, Operation} from "./reducer";
 
 const init = () => {
-  const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f);
+  const store = createStore(
+      reducer,
+      compose(
+          applyMiddleware(thunk),
+          window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+      )
+  );
+
+  store.dispatch(Operation.loadQuestions());
 
   ReactDOM.render(<Provider store={store}>
     <App
       maxMistakes={settings.errorCount}
-      questions={questions}
+      // questions={questions}
     />
   </Provider>,
   document.querySelector(`#root`)
