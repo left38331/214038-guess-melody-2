@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import {ActionCreator} from '../../reducer';
+import {ActionCreator} from 'actions/actions-creator';
 import {WelcomeScreen} from 'components/welcome-screen/welcome-screen';
 import {GuessArtist} from 'components/guess-artist/guess-artist';
 import {GuessGenre} from 'components/guess-genre/guess-genre';
-import withActivePlayer from '../../hocs/with-active-player/with-active-player';
-import withUserAnswers from '../../hocs/with-user-answers/with-user-answers';
+import withActivePlayer from 'hocs/with-active-player/with-active-player';
+import withUserAnswers from 'hocs/with-user-answers/with-user-answers';
 
 const GuessGenreWrapped = withUserAnswers(withActivePlayer(GuessGenre));
 const GuessArtistWrapped = withActivePlayer(GuessArtist);
@@ -15,7 +15,6 @@ const GuessArtistWrapped = withActivePlayer(GuessArtist);
 export class App extends React.PureComponent {
   getScreen() {
     const {mistakes, maxMistakes, questions, onWelcomeScreenClick, step, onUserAnswer} = this.props;
-    console.log(this.props.questions)
 
     if (step === -1) {
       return <WelcomeScreen
@@ -62,9 +61,9 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  step: state.step,
-  mistakes: state.mistakes,
-  questions: state.questions
+  step: state.stateGame.step,
+  mistakes: state.stateUser.mistakes,
+  questions: state.appData.questions
 });
 
 const mapDispatchToProps = (dispatch) => ({

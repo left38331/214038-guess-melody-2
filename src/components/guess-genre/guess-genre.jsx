@@ -21,7 +21,7 @@ export const GuessGenre = (props) => {
     </header>
 
     <section className="game__screen">
-      <h2 className="game__title">Выберите инди-рок треки</h2>
+      <h2 className="game__title">Выберите {props.question.genre} треки</h2>
       <form className="game__tracks" onSubmit={(evt) => {
         evt.preventDefault();
         props.onUserAnswer(props.stateUserAnswers);

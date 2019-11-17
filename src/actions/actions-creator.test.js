@@ -1,5 +1,4 @@
-import {ActionCreator} from './reducer';
-import {reducer} from './reducer';
+import {ActionCreator} from './actions-creator';
 
 describe(`Action creators works correctly`, () => {
   it(`Action creator for incrementing step returns correct action`, () => {
@@ -176,16 +175,6 @@ describe(`Action creators works correctly`, () => {
       ]
     }, Infinity, 0)).toEqual({
       type: `RESET`
-    });
-  });
-});
-
-describe(`Reducer works correctly`, () => {
-  it(`Reducer without additional parameters should return initial state`, () => {
-    expect(reducer(undefined, {})).toEqual({
-      step: -1,
-      mistakes: 0,
-      time: 300
     });
   });
 });

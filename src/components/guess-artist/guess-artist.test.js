@@ -9,10 +9,18 @@ import {questions} from '../../mocks/questions';
 const question = questions[0];
 
 it(`render correctly guess artist component`, () => {
-  const store = createStore(() => ({
+  const gameState = {
     step: -1,
+    time: 300,
+  };
+
+  const userState = {
     mistakes: 0,
-    time: 300
+  };
+
+  const store = createStore(() => ({
+    stateUser: userState,
+    stateGame: gameState
   }));
 
   const props = {
@@ -20,6 +28,7 @@ it(`render correctly guess artist component`, () => {
     onUserAnswer: () => {},
     mistakes: 0,
     renderPlayer: () => {},
+    time: 300
   };
 
   const guessArtistComponent = renderer.create(<Provider store={store}>

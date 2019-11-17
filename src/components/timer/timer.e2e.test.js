@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 
-import {Timer} from "components/timer/timer";
+import {Timer} from 'components/timer/timer';
 
 it(`Timer changed state after click`, (done) => {
   const clickHandler = jest.fn();

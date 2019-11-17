@@ -1,15 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import {compose} from 'recompose';
 
 import App from 'components/app/app';
-import {settings} from "./mocks/questions";
-import {reducer, Operation} from "./reducer";
+import {settings} from './mocks/questions';
+import {stateUser} from './reducers/state-user/state-user';
+import {appData} from './reducers/app-data/app-data';
+import {stateGame} from './reducers/state-game/state-game';
+import {Operation} from './actions/async-actions';
 
 const init = () => {
+  const reducer = combineReducers({
+    stateUser,
+    stateGame,
+    appData
+  });
+
   const store = createStore(
       reducer,
       compose(
@@ -23,7 +32,6 @@ const init = () => {
   ReactDOM.render(<Provider store={store}>
     <App
       maxMistakes={settings.errorCount}
-      // questions={questions}
     />
   </Provider>,
   document.querySelector(`#root`)

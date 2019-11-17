@@ -72,7 +72,9 @@ exports[`render correctly guess genre component 1`] = `
     <h2
       className="game__title"
     >
-      Выберите инди-рок треки
+      Выберите 
+      rock
+       треки
     </h2>
     <form
       className="game__tracks"
@@ -87,11 +89,34 @@ exports[`render correctly guess genre component 1`] = `
           <input
             checked={false}
             className="game__input visually-hidden"
-            id={1}
+            id={0}
             name="answer"
             onChange={[Function]}
             type="checkbox"
             value="answer-1"
+          />
+          <label
+            className="game__check"
+            htmlFor={0}
+          >
+            Отметить
+          </label>
+        </div>
+      </div>
+      <div
+        className="track"
+      >
+        <div
+          className="game__answer"
+        >
+          <input
+            checked={false}
+            className="game__input visually-hidden"
+            id={1}
+            name="answer"
+            onChange={[Function]}
+            type="checkbox"
+            value="answer-2"
           />
           <label
             className="game__check"
@@ -114,7 +139,7 @@ exports[`render correctly guess genre component 1`] = `
             name="answer"
             onChange={[Function]}
             type="checkbox"
-            value="answer-2"
+            value="answer-3"
           />
           <label
             className="game__check"
@@ -137,34 +162,11 @@ exports[`render correctly guess genre component 1`] = `
             name="answer"
             onChange={[Function]}
             type="checkbox"
-            value="answer-3"
-          />
-          <label
-            className="game__check"
-            htmlFor={3}
-          >
-            Отметить
-          </label>
-        </div>
-      </div>
-      <div
-        className="track"
-      >
-        <div
-          className="game__answer"
-        >
-          <input
-            checked={false}
-            className="game__input visually-hidden"
-            id={4}
-            name="answer"
-            onChange={[Function]}
-            type="checkbox"
             value="answer-4"
           />
           <label
             className="game__check"
-            htmlFor={4}
+            htmlFor={3}
           >
             Отметить
           </label>

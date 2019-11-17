@@ -1,7 +1,7 @@
 import React from 'react';
 import {mount} from 'enzyme';
 
-import withActivePlayer from "./with-active-player";
+import withActivePlayer from './with-active-player';
 
 const MockComponent = () => <div />;
 const MockComponentWrapped = withActivePlayer(MockComponent);
