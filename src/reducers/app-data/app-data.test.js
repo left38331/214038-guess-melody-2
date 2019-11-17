@@ -2,7 +2,7 @@ import MockAdapter from 'axios-mock-adapter';
 
 import {appData} from './app-data';
 import {Operation} from '../../actions/async-actions';
-import api from '../../api';
+import createAPI from '../../api';
 
 describe(`Reducer works correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
@@ -12,6 +12,7 @@ describe(`Reducer works correctly`, () => {
   });
 
   it(`Should make a correct API call to /questions`, () => {
+    const api = createAPI();
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
     const questionLoader = Operation.loadQuestions();
@@ -20,9 +21,7 @@ describe(`Reducer works correctly`, () => {
       .onGet(`/questions`)
       .reply(200, [{fake: true}]);
 
-    api.get(`/questions`);
-
-    return questionLoader(dispatch)
+    return questionLoader(dispatch, null, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {

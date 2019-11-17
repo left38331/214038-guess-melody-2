@@ -1,8 +1,7 @@
-import api from '../api';
 import {ActionCreator} from './actions-creator';
 
 export const Operation = {
-  loadQuestions: () => (dispatch) => {
+  loadQuestions: () => (dispatch, _, api) => {
     return api.get(`/questions`)
       .then((response) => {
         dispatch(ActionCreator.loadQuestions(response.data));

@@ -11,6 +11,7 @@ import {stateUser} from './reducers/state-user/state-user';
 import {appData} from './reducers/app-data/app-data';
 import {stateGame} from './reducers/state-game/state-game';
 import {Operation} from './actions/async-actions';
+import createAPI from './api';
 
 const init = () => {
   const reducer = combineReducers({
@@ -19,10 +20,12 @@ const init = () => {
     appData
   });
 
+  const api = createAPI((...args) => store.dispatch(...args));
+
   const store = createStore(
       reducer,
       compose(
-          applyMiddleware(thunk),
+          applyMiddleware(thunk.withExtraArgument(api)),
           window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
       )
   );
