@@ -9,10 +9,18 @@ import {questions} from '../../mocks/questions';
 const question = questions[1];
 
 it(`render correctly guess genre component`, () => {
-  const store = createStore(() => ({
+  const gameState = {
     step: -1,
+    time: 300,
+  };
+
+  const userState = {
     mistakes: 0,
-    time: 300
+  };
+
+  const store = createStore(() => ({
+    stateUser: userState,
+    stateGame: gameState
   }));
 
   const props = {
@@ -20,7 +28,6 @@ it(`render correctly guess genre component`, () => {
     onUserAnswer: () => {},
     onTimeTick: () => {},
     mistakes: 0,
-    time: 300,
     renderPlayer: () => {},
     renderGameAnswer: () => {},
     stateUserAnswers: [false, false, false, false],

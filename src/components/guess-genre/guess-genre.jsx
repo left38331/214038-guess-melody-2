@@ -21,20 +21,20 @@ export const GuessGenre = (props) => {
     </header>
 
     <section className="game__screen">
-      <h2 className="game__title">Выберите инди-рок треки</h2>
+      <h2 className="game__title">Выберите {props.question.genre} треки</h2>
       <form className="game__tracks" onSubmit={(evt) => {
         evt.preventDefault();
         props.onUserAnswer(props.stateUserAnswers);
       }}>
 
         {props.question.answers.map((it, i) => {
-          return <div className="track" key={it.id}>
+          return <div className="track" key={i}>
             {props.renderPlayer(it, i)}
             <div className="game__answer">
-              <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${i + 1}`} id={it.id} checked={props.stateUserAnswers[i]} onChange={() => {
+              <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${i + 1}`} id={i} checked={props.stateUserAnswers[i]} onChange={() => {
                 const userAnswer = [...props.stateUserAnswers]; userAnswer[i] = !userAnswer[i]; props.setStateUserAnswer(userAnswer);
               }} />
-              <label className="game__check" htmlFor={it.id}>Отметить</label>
+              <label className="game__check" htmlFor={i}>Отметить</label>
             </div>
           </div>;
         })}

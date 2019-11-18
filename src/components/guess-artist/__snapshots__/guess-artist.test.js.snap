@@ -88,7 +88,7 @@ exports[`render correctly guess artist component 1`] = `
       >
         <input
           className="artist__input visually-hidden"
-          id={1}
+          id={0}
           name="answer"
           onChange={[Function]}
           type="radio"
@@ -96,7 +96,7 @@ exports[`render correctly guess artist component 1`] = `
         />
         <label
           className="artist__name"
-          htmlFor={1}
+          htmlFor={0}
         >
           <img
             alt="John Snow"
@@ -111,7 +111,7 @@ exports[`render correctly guess artist component 1`] = `
       >
         <input
           className="artist__input visually-hidden"
-          id={2}
+          id={1}
           name="answer"
           onChange={[Function]}
           type="radio"
@@ -119,7 +119,7 @@ exports[`render correctly guess artist component 1`] = `
         />
         <label
           className="artist__name"
-          htmlFor={2}
+          htmlFor={1}
         >
           <img
             alt="Jack Daniels"
@@ -134,7 +134,7 @@ exports[`render correctly guess artist component 1`] = `
       >
         <input
           className="artist__input visually-hidden"
-          id={3}
+          id={2}
           name="answer"
           onChange={[Function]}
           type="radio"
@@ -142,7 +142,7 @@ exports[`render correctly guess artist component 1`] = `
         />
         <label
           className="artist__name"
-          htmlFor={3}
+          htmlFor={2}
         >
           <img
             alt="Jim Beam"

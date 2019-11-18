@@ -6,12 +6,6 @@ const isGenreAnswerCorrect = (userAnswer, question) => userAnswer.every((it, i) 
   question.answers[i].genre === question.genre
 ));
 
-const initialState = {
-  step: -1,
-  mistakes: 0,
-  time: 300
-};
-
 export const ActionCreator = {
   incrementStep: () => ({
     type: `INCREMENT_STEP`,
@@ -53,25 +47,12 @@ export const ActionCreator = {
       type: `DECREMENT_TIME`,
       payload: 1
     };
+  },
+
+  loadQuestions: (questions) => {
+    return {
+      type: `LOAD_QUESTIONS`,
+      payload: questions
+    };
   }
-};
-
-export const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case `INCREMENT_STEP`: return Object.assign({}, state, {
-      step: state.step + action.payload
-    });
-
-    case `INCREMENT_MISTAKES`: return Object.assign({}, state, {
-      mistakes: state.mistakes + action.payload
-    });
-
-    case `DECREMENT_TIME`: return Object.assign({}, state, {
-      time: state.time - action.payload
-    });
-
-    case `RESET`: return Object.assign({}, initialState);
-  }
-
-  return state;
 };

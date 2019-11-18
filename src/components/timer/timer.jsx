@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer';
+import {ActionCreator} from 'actions/actions-creator';
 
 const SECONDS_IN_MINUTE = 60;
 
@@ -58,7 +58,7 @@ Timer.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  time: state.time
+  time: state.stateGame.time
 });
 
 const mapDispatchToProps = (dispatch) => ({

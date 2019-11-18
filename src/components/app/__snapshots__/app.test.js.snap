@@ -155,7 +155,7 @@ exports[`render correctly second screen 1`] = `
       >
         <input
           className="artist__input visually-hidden"
-          id={1}
+          id={0}
           name="answer"
           onChange={[Function]}
           type="radio"
@@ -163,7 +163,7 @@ exports[`render correctly second screen 1`] = `
         />
         <label
           className="artist__name"
-          htmlFor={1}
+          htmlFor={0}
         >
           <img
             alt="John Snow"
@@ -178,7 +178,7 @@ exports[`render correctly second screen 1`] = `
       >
         <input
           className="artist__input visually-hidden"
-          id={2}
+          id={1}
           name="answer"
           onChange={[Function]}
           type="radio"
@@ -186,7 +186,7 @@ exports[`render correctly second screen 1`] = `
         />
         <label
           className="artist__name"
-          htmlFor={2}
+          htmlFor={1}
         >
           <img
             alt="Jack Daniels"
@@ -201,7 +201,7 @@ exports[`render correctly second screen 1`] = `
       >
         <input
           className="artist__input visually-hidden"
-          id={3}
+          id={2}
           name="answer"
           onChange={[Function]}
           type="radio"
@@ -209,7 +209,7 @@ exports[`render correctly second screen 1`] = `
         />
         <label
           className="artist__name"
-          htmlFor={3}
+          htmlFor={2}
         >
           <img
             alt="Jim Beam"
@@ -224,7 +224,7 @@ exports[`render correctly second screen 1`] = `
 </section>
 `;
 
-exports[`render correctly thrid screen 1`] = `
+exports[`render correctly third screen 1`] = `
 <section
   className="game game--genre"
 >
@@ -296,7 +296,9 @@ exports[`render correctly thrid screen 1`] = `
     <h2
       className="game__title"
     >
-      Выберите инди-рок треки
+      Выберите 
+      rock
+       треки
     </h2>
     <form
       className="game__tracks"
@@ -323,7 +325,7 @@ exports[`render correctly thrid screen 1`] = `
           <input
             checked={false}
             className="game__input visually-hidden"
-            id={1}
+            id={0}
             name="answer"
             onChange={[Function]}
             type="checkbox"
@@ -331,7 +333,7 @@ exports[`render correctly thrid screen 1`] = `
           />
           <label
             className="game__check"
-            htmlFor={1}
+            htmlFor={0}
           >
             Отметить
           </label>
@@ -358,7 +360,7 @@ exports[`render correctly thrid screen 1`] = `
           <input
             checked={false}
             className="game__input visually-hidden"
-            id={2}
+            id={1}
             name="answer"
             onChange={[Function]}
             type="checkbox"
@@ -366,7 +368,7 @@ exports[`render correctly thrid screen 1`] = `
           />
           <label
             className="game__check"
-            htmlFor={2}
+            htmlFor={1}
           >
             Отметить
           </label>
@@ -393,7 +395,7 @@ exports[`render correctly thrid screen 1`] = `
           <input
             checked={false}
             className="game__input visually-hidden"
-            id={3}
+            id={2}
             name="answer"
             onChange={[Function]}
             type="checkbox"
@@ -401,7 +403,7 @@ exports[`render correctly thrid screen 1`] = `
           />
           <label
             className="game__check"
-            htmlFor={3}
+            htmlFor={2}
           >
             Отметить
           </label>
@@ -428,7 +430,7 @@ exports[`render correctly thrid screen 1`] = `
           <input
             checked={false}
             className="game__input visually-hidden"
-            id={4}
+            id={3}
             name="answer"
             onChange={[Function]}
             type="checkbox"
@@ -436,7 +438,7 @@ exports[`render correctly thrid screen 1`] = `
           />
           <label
             className="game__check"
-            htmlFor={4}
+            htmlFor={3}
           >
             Отметить
           </label>

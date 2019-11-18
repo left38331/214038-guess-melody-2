@@ -6,7 +6,6 @@ import {Provider} from 'react-redux';
 import {App} from './app';
 import {questions} from '../../mocks/questions';
 
-
 it(`render correctly first screen`, () => {
   const props = {
     mistakes: 0,
@@ -21,10 +20,18 @@ it(`render correctly first screen`, () => {
   expect(mainComponent).toMatchSnapshot();
 });
 
-const store = createStore(() => ({
+const gameState = {
   step: -1,
+  time: 300,
+};
+
+const userState = {
   mistakes: 0,
-  time: 300
+};
+
+const store = createStore(() => ({
+  stateUser: userState,
+  stateGame: gameState
 }));
 
 it(`render correctly second screen`, () => {
@@ -43,14 +50,14 @@ it(`render correctly second screen`, () => {
   expect(mainComponent).toMatchSnapshot();
 });
 
-it(`render correctly thrid screen`, () => {
+it(`render correctly third screen`, () => {
   const props = {
     mistakes: 0,
     maxMistakes: 3,
     step: 1,
     onWelcomeScreenClick: () => {},
     onUserAnswer: () => {},
-    questions
+    questions,
   };
   const mainComponent = renderer.create(<Provider store={store}>
     <App {...props} />

@@ -15,12 +15,12 @@ const withActivePlayer = (Component) => {
     render() {
       return <Component
         {...this.props}
-        renderPlayer={(it) => {
+        renderPlayer={(it, i) => {
           return <AudioPlayer
-            isPlaying={it.id === this.state.activePlayerId}
+            isPlaying={i === this.state.activePlayerId}
             src={it.src}
             onPlayButtonClick={() => this.setState({
-              activePlayerId: this.state.activePlayerId === it.id ? null : it.id
+              activePlayerId: this.state.activePlayerId === i ? null : i
             })}
           />;
         }}

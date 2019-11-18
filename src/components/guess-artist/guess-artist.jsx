@@ -30,9 +30,9 @@ export const GuessArtist = (props) => {
 
       <form className="game__artist">
         {props.question.answers.map((item, i) => {
-          return <div className="artist" key={item.id}>
-            <input className="artist__input visually-hidden" type="radio" name="answer" value={`answer-${i + 1}`} id={item.id} onChange={()=> props.onUserAnswer(item)}/>
-            <label className="artist__name" htmlFor={item.id}>
+          return <div className="artist" key={i}>
+            <input className="artist__input visually-hidden" type="radio" name="answer" value={`answer-${i + 1}`} id={i} onChange={()=> props.onUserAnswer(item)}/>
+            <label className="artist__name" htmlFor={i}>
               <img className="artist__picture" src={item.picture} alt={item.artist}/>
               {item.artist}
             </label>
