@@ -63,6 +63,7 @@ App.propTypes = {
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   step: state.stateGame.step,
   mistakes: state.stateUser.mistakes,
+  maxMistakes: state.stateGame.maxMistakes,
   questions: state.appData.questions
 });
 

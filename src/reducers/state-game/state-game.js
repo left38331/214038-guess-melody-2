@@ -1,6 +1,7 @@
 const initialState = {
   step: -1,
-  time: 300
+  time: 300,
+  maxMistakes: 3
 };
 
 export const stateGame = (state = initialState, action) => {
