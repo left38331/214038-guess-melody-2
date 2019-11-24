@@ -13,6 +13,9 @@ it(`render correctly first screen`, () => {
     step: -1,
     onWelcomeScreenClick: () => {},
     onUserAnswer: () => {},
+    isAuthorizationRequired: true,
+    requireAuthorization: () => {},
+    onSubmit: () => {},
   };
 
   const mainComponent = renderer.create(<App {...props} />).toJSON();
@@ -41,7 +44,10 @@ it(`render correctly second screen`, () => {
     step: 0,
     onWelcomeScreenClick: () => {},
     onUserAnswer: () => {},
-    questions
+    questions,
+    isAuthorizationRequired: true,
+    requireAuthorization: () => {},
+    onSubmit: () => {},
   };
   const mainComponent = renderer.create(<Provider store={store}>
     <App {...props} />
@@ -58,6 +64,9 @@ it(`render correctly third screen`, () => {
     onWelcomeScreenClick: () => {},
     onUserAnswer: () => {},
     questions,
+    isAuthorizationRequired: true,
+    requireAuthorization: () => {},
+    onSubmit: () => {},
   };
   const mainComponent = renderer.create(<Provider store={store}>
     <App {...props} />
