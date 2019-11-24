@@ -54,5 +54,15 @@ export const ActionCreator = {
       type: `LOAD_QUESTIONS`,
       payload: questions
     };
-  }
+  },
+
+  requireAuthorization: (status) => ({
+    type: `REQUIRE_AUTHORIZATION`,
+    payload: status
+  }),
+
+  singInUser: (userData) => ({
+    type: `SING_IN_USER`,
+    payload: userData
+  }),
 };
